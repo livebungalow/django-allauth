@@ -1,4 +1,4 @@
-0.42.0 (Unreleased)
+0.42.0 (2020-05-24)
 *******************
 
 Note worthy changes
