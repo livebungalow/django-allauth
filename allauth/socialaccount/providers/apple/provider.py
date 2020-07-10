@@ -28,11 +28,13 @@ class AppleProvider(OAuth2Provider):
     def extract_email_addresses(self, data):
         ret = []
         email = data.get('email')
-        verified = data.get('email_verified')
-        print(email, verified)
-        if not isinstance(verified, bool) and verified:
-            verified = verified.lower() == 'true'
+
         if email:
+            verified = data.get('email_verified', '')
+
+            if not isinstance(verified, bool):
+                verified = verified.lower() == 'true'
+
             ret.append(
                 EmailAddress(
                     email=email,
@@ -40,6 +42,7 @@ class AppleProvider(OAuth2Provider):
                     primary=True,
                 )
             )
+
         return ret
 
     def get_default_scope(self):
